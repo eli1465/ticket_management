@@ -15,6 +15,7 @@ def age_validator(age):
 def id_validator(person_id):
     if not (type(person_id) == int and 1 <= person_id):
         raise ValueError("Invalid ID")
+
 def username_validator(username):
     if not (type(username) == str and 3 <= len(username) <= 30):
         raise ValueError("Invalid username")

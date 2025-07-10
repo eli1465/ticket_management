@@ -28,7 +28,6 @@ def write_persons(person_list):
         print(f"Error writing persons file")
 
 # ticket
-
 def read_tickets():
     if file_exists(ticket_file):
         try:

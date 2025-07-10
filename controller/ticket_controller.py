@@ -55,6 +55,7 @@ class TicketController:
         except:
             return False, f"Can't Load Tickets"
 
+
     def find_by_id_ (self,ticket_id):
         try:
             for ticket in ticket_list:

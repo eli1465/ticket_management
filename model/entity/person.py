@@ -9,6 +9,7 @@ class Person:
         self.username = username
         self.password = password
         self.is_locked=True
+
     def full_name(self):
         return f"{self.name} {self.family}"
 
