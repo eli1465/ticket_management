@@ -1,5 +1,9 @@
 from controller.ticket_controller import TicketController
+from tkinter import *
+import tkinter.ttk as ttk
+import tkinter.messagebox as msg
 from view import *
+from model.repository.file_manager import *
 
 class TicketView:
     def save_click(self):
@@ -19,7 +23,7 @@ class TicketView:
             msg.showerror("Save Error", message)
 
     def __init__(self):
-        win = TK()
+        win=TK()
         win.geometry("300x400")
 
         self.id = IntVar()
