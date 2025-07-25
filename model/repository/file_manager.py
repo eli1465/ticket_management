@@ -2,7 +2,7 @@ import pickle
 import os
 
 # فایل‌ها
-person_file= "person.dat"
+user_file= "user.dat"
 ticket_file= "ticket.dat"
 
 def file_exists(file_name):
@@ -10,22 +10,22 @@ def file_exists(file_name):
 
 #  Person
 
-def read_persons():
-    if file_exists(person_file):
+def read_users():
+    if file_exists(user_file):
         try:
-            with open(person_file, "rb") as file:
+            with open(user_file, "rb") as file:
                 return pickle.load(file)
         except:
             print(f"Error reading persons file")
             return []
     return []
 
-def write_persons(person_list):
+def write_users(user_list):
     try:
-        with open(person_file, "wb") as file:
-            pickle.dump(person_list, file)
+        with open(user_file, "wb") as file:
+            pickle.dump(user_list, file)
     except:
-        print(f"Error writing persons file")
+        print(f"Error writing user file")
 
 # ticket
 def read_tickets():

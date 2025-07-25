@@ -8,10 +8,6 @@ def family_validator(family):
     if not (type(family) == str and re.match(r"^[a-zA-Z\s]{3,30}$", family)):
         raise ValueError("Invalid family")
 
-def age_validator(age):
-    if not (type(age) == int and 0 < age < 150):
-        raise ValueError("Invalid age")
-
 def id_validator(person_id):
     if not (type(person_id) == int and 1 <= person_id):
         raise ValueError("Invalid ID")
@@ -48,10 +44,6 @@ def datetime_validator(dt):
 def price_validator(price):
     if not (type(price) == int and price > 0):
         raise ValueError("Invalid price")
-
-def seat_no_validator(seat_no):
-    if not (type(seat_no) == int and seat_no > 0):
-        raise ValueError("Invalid seat number")
 
 def seat_no_validator(seat_no):
     if not (type(seat_no) == int and 1 <= seat_no <= 300):

@@ -1,23 +1,23 @@
 from model.tools.validation import *
 
-class Person:
-    def __init__(self, code, name, family, age,username,password,is_locked=True):
+class User:
+    def __init__(self, code, name, family,username,password,role,locked=False):
         self.code = code
         self.name = name
         self.family = family
-        self.age = age
         self.username = username
         self.password = password
-        self.is_locked=True
+        self.role = role
+        self.locked = locked
 
     def full_name(self):
         return f"{self.name} {self.family}"
 
     def __repr__(self):
-        return f"{self.full_name()} ({self.age}) years old"
+        return f"{self.__dict__}"
 
-    def to_tuple(self):
-        return (self.code, self.name, self.family, self.age,self.username,self.password,self.is_locked)
+    #def to_tuple(self):
+        #return (self.code, self.name, self.family, self.age,self.username,self.password,self.locked)
 
     @property
     def name(self):
@@ -36,15 +36,6 @@ class Person:
     def family(self, value):
         family_validator(value)
         self._family = value
-
-    @property
-    def age(self):
-        return self._age
-
-    @age.setter
-    def age(self, value):
-        age_validator(value)
-        self._age = value
 
         # ----- username -----
 
@@ -69,13 +60,26 @@ class Person:
             raise ValueError("Invalid password")
         self._password = value
 
-    # ----- is_locked -----
+    # ----role------
     @property
-    def is_locked(self):
-        return self._is_locked
+    def role(self):
+        return self._role
 
-    @is_locked.setter
-    def is_locked(self, value):
+    @role.setter
+    def role(self,value):
+        if not isinstance("Customer","Admin"):
+            raise ValueError (" must be customer or admin")
+    # ----- locked -----
+    @property
+    def locked(self):
+        return self.locked
+
+    @locked.setter
+    def locked(self, value):
         if not isinstance(value, bool):
-            raise ValueError("is_locked must be a boolean")
-        self._is_locked = value
+            raise ValueError("locked must be a boolean")
+        self.locked = value
+
+# todo : getter/setter ---> validation
+
+

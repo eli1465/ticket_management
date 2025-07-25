@@ -1,4 +1,4 @@
-from ..tools.validation import *
+from model.tools.validation import *
 
 class Ticket:
     def __init__(self, id, source, destination, seat_no, date, time, airline):

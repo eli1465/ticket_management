@@ -24,7 +24,7 @@ class TicketView:
 
     def __init__(self):
         win=TK()
-        win.geometry("300x400")
+        win.geometry("900x600")
 
         self.id = IntVar()
         self.source = StringVar()
