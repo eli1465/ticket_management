@@ -8,7 +8,7 @@ class UserView:
     def __init__(self):
         self.win = Tk()
         self.win.title("User Manager")
-        self.win.geometry("900x600")
+        self.win.geometry("1200x600")
 
         self.user_controller = UserController()
 
@@ -48,17 +48,17 @@ class UserView:
         Checkbutton(self.win, text="Locked", variable=self.locked).place(x=120, y=320)
 
         # search_by_name_family
-        Label(self.win, text="Search by Name").place(x=300, y=20)
+        Label(self.win, text="Search by Name").place(x=400, y=20)
         self.search_name = StringVar()
         self.search_name_text = Entry(self.win, textvariable=self.search_name, width=23, fg="gray64")
         self.search_name_text.bind("<KeyRelease>", self.search_name_family)
-        self.search_name_text.place(x=420, y=20)
+        self.search_name_text.place(x=520, y=20)
 
-        Label(self.win, text="Search by Family").place(x=550, y=20)
+        Label(self.win, text="Search by Family").place(x=750, y=20)
         self.search_family = StringVar()
         self.search_family_text = Entry(self.win, textvariable=self.search_family, width=23, fg="gray64")
         self.search_family_text.bind("<KeyRelease>", self.search_name_family)
-        self.search_family_text.place(x=670, y=20)
+        self.search_family_text.place(x=870, y=20)
 
         self.table = ttk.Treeview(self.win, columns=[1,2,3,4,5,6,7], show="headings")
         self.table.heading(1, text="Code")
@@ -80,9 +80,9 @@ class UserView:
         self.table.tag_configure("ok", background="Lightgreen")
         self.table.tag_configure("Locked", background="pink")
         self.table.bind("<ButtonRelease-1>", self.select_user)
-        self.table.place(x=300, y=100, height=460)
+        self.table.place(x=450, y=70, height=500)
 
-        Button(self.win, text="Save", command=self.save_click, width=34, height=2).place(x=20, y=450)
+        Button(self.win, text="Save", command=self.save_click, width=30, height=2).place(x=20, y=450)
         Button(self.win, text="Edit", command=self.edit_click, width=15, height=2).place(x=20, y=520)
         Button(self.win, text="Delete", command=self.delete_click, width=15, height=2).place(x=152, y=520)
 

@@ -7,69 +7,69 @@ class TicketView:
     def __init__(self):
         self.win = Tk()
         self.win.title("Ticket Manager")
-        self.win.geometry("900x600")
+        self.win.geometry("1200x600")  
 
         self.ticket_controller = TicketController()
 
         # id
         Label(self.win, text="ID").place(x=20, y=20)
-        self.id = IntVar()
-        Entry(self.win, textvariable=self.id, width=23).place(x=120, y=20)
+        self.id = StringVar()
+        Entry(self.win, textvariable=self.id, width=25, justify="center").place(x=155, y=20)
 
         # source
-        Label(self.win, text="Source").place(x=20, y=70)
+        Label(self.win, text="Source").place(x=20, y=60)
         self.source = StringVar()
-        Entry(self.win, textvariable=self.source, width=23).place(x=120, y=70)
+        Entry(self.win, textvariable=self.source, width=25).place(x=155, y=60)
 
         # destination
-        Label(self.win, text="Destination").place(x=20, y=120)
+        Label(self.win, text="Destination").place(x=20, y=100)
         self.destination = StringVar()
-        Entry(self.win, textvariable=self.destination, width=23).place(x=120, y=120)
+        Entry(self.win, textvariable=self.destination, width=25).place(x=155, y=100)
 
         # seat_no
-        Label(self.win, text="Seat No").place(x=20, y=170)
+        Label(self.win, text="Seat No").place(x=20, y=140)
         self.seat_no = StringVar()
-        Entry(self.win, textvariable=self.seat_no, width=23).place(x=120, y=170)
+        Entry(self.win, textvariable=self.seat_no, width=25, justify="center").place(x=155, y=140)
 
         # date
-        Label(self.win, text="Date (YYYY-MM-DD)").place(x=20, y=220)
+        Label(self.win, text="Date (YYYY-MM-DD)").place(x=20, y=180)
         self.date = StringVar()
-        Entry(self.win, textvariable=self.date, width=23).place(x=120, y=220)
+        Entry(self.win, textvariable=self.date, width=25).place(x=155, y=180)
 
         # time
-        Label(self.win, text="Time (HH:MM)").place(x=20, y=270)
+        Label(self.win, text="Time (HH:MM)").place(x=20, y=220)
         self.time = StringVar()
-        Entry(self.win, textvariable=self.time, width=23).place(x=120, y=270)
+        Entry(self.win, textvariable=self.time, width=25).place(x=155, y=220)
 
         # airline
-        Label(self.win, text="Airline").place(x=20, y=320)
+        Label(self.win, text="Airline").place(x=20, y=260)
         self.airline = StringVar()
-        Entry(self.win, textvariable=self.airline, width=23).place(x=120, y=320)
+        Entry(self.win, textvariable=self.airline, width=25).place(x=155, y=260)
 
-        # دکمه‌ها
-        Button(self.win, text="Save", command=self.save_click, width=34, height=2).place(x=20, y=450)
-        Button(self.win, text="Edit", command=self.edit_click, width=15, height=2).place(x=20, y=520)
-        Button(self.win, text="Delete", command=self.delete_click, width=15, height=2).place(x=152, y=520)
-        Button(self.win, text="Show All", command=self.show_all_click).place(x=20, y=550)
-        # جدول
+       
+        Button(self.win, text="Save", command=self.save_click, width=15, height=2).place(x=20, y=320)
+        Button(self.win, text="Edit", command=self.edit_click, width=15, height=2).place(x=150, y=320)
+        Button(self.win, text="Delete", command=self.delete_click, width=15, height=2).place(x=20, y=400)
+        Button(self.win, text="Show All", command=self.show_all_click, width=15, height=2).place(x=150, y=400)
+
         self.table = ttk.Treeview(self.win, columns=[1,2,3,4,5,6,7], show="headings")
-        self.table.heading(1, text="ID")
-        self.table.heading(2, text="Source")
-        self.table.heading(3, text="Destination")
-        self.table.heading(4, text="Seat No")
-        self.table.heading(5, text="Date")
-        self.table.heading(6, text="Time")
-        self.table.heading(7, text="Airline")
+        self.table.heading(1, text="ID", anchor="center")
+        self.table.heading(2, text="Source", anchor="center")
+        self.table.heading(3, text="Destination", anchor="center")
+        self.table.heading(4, text="Seat No", anchor="center")
+        self.table.heading(5, text="Date", anchor="center")
+        self.table.heading(6, text="Time", anchor="center")
+        self.table.heading(7, text="Airline", anchor="center")
 
-        self.table.column(1, width=60)
-        self.table.column(2, width=100)
-        self.table.column(3, width=100)
-        self.table.column(4, width=80)
-        self.table.column(5, width=100)
-        self.table.column(6, width=80)
-        self.table.column(7, width=100)
+        self.table.column(1, width=80)   
+        self.table.column(2, width=120)
+        self.table.column(3, width=120)
+        self.table.column(4, width=80)  
+        self.table.column(5, width=120)
+        self.table.column(6, width=100)
+        self.table.column(7, width=120 )
 
-        self.table.place(x=300, y=100, height=460)
+        self.table.place(x=400, y=20, height=500) 
         self.table.bind("<<TreeviewSelect>>", self.on_table_select)
 
         self.reset_form()
@@ -93,15 +93,6 @@ class TicketView:
         else:
             msg.showerror("Save Error", message)
 
-    def delete_click(self):
-        status, message = self.ticket_controller.delete(self.id.get())
-        if status:
-            msg.showinfo("Delete", message)
-            self.reset_form()
-            self.refresh_tree()
-        else:
-            msg.showerror("Delete Error", message)
-
     def edit_click(self):
         status, message = self.ticket_controller.edit(
             self.id.get(),
@@ -119,7 +110,15 @@ class TicketView:
         else:
             msg.showerror("Edit Error", message)
 
-   
+    def delete_click(self):
+        status, message = self.ticket_controller.delete(self.id.get())
+        if status:
+            msg.showinfo("Delete", message)
+            self.reset_form()
+            self.refresh_tree()
+        else:
+            msg.showerror("Delete Error", message)
+
     def refresh_tree(self):
         status, r = self.ticket_controller.find_all()
         if status:
