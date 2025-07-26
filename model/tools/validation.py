@@ -5,15 +5,15 @@ def name_validator(name):
         raise ValueError("Invalid name")
 
 def family_validator(family):
-    if not (type(family) == str and re.match(r"^[a-zA-Z\s]{3,30}$", family)):
+    if not (isinstance(family, str) and re.match(r"^[a-zA-Z\s]{3,30}$", family)):
         raise ValueError("Invalid family")
 
-def id_validator(person_id):
-    if not (type(person_id) == int and 1 <= person_id):
-        raise ValueError("Invalid ID")
+def id_validator(id):
+    if not (isinstance(id, int) and id > 0):
+        raise ValueError("Invalid ID (must be positive integer)")
 
 def username_validator(username):
-    if not (type(username) == str and 3 <= len(username) <= 30):
+    if not (isinstance(username, str) and 3 <= len(username) <= 30):
         raise ValueError("Invalid username")
 
 def password_validator(password):
@@ -21,17 +21,18 @@ def password_validator(password):
         raise ValueError("Invalid password")
 
 def bool_validator(value):
-    if str(value).lower() not in ['true', 'false']:
+    if not (isinstance(value, bool) or str(value).lower() in ['true', 'false']):
         raise ValueError("Invalid boolean value (true/false only)")
 
 def role_validator(role):
-    if role not in ['customer', 'admin']:
+    if str(role).lower() not in ['customer', 'admin']:
         raise ValueError("Invalid role. Must be 'customer' or 'admin'")
 
-#ticket
+# ticket
 def city_validator(city):
-    if not (type(city) == str and 2 <= len(city) <= 30):
+    if not (isinstance(city, str) and re.match(r"^[a-zA-Z\s]{2,50}$", city)):
         raise ValueError("Invalid city")
+
 def code_validator(code):
     if not (type(code) == str and 3 <= len(code) <= 20):
         raise ValueError("Invalid ticket code")
@@ -40,10 +41,6 @@ def datetime_validator(dt):
     import re
     if not (type(dt) == str and re.match(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$', dt)):
         raise ValueError("Invalid datetime format (YYYY-MM-DD HH:MM)")
-
-def price_validator(price):
-    if not (type(price) == int and price > 0):
-        raise ValueError("Invalid price")
 
 def seat_no_validator(seat_no):
     if not (type(seat_no) == int and 1 <= seat_no <= 300):
@@ -54,9 +51,9 @@ def date_validator(date):
         raise ValueError("Invalid date (YYYY-MM-DD)")
 
 def time_validator(time):
-    if not (type(time) == str and re.match(r"\d{2}:\d{2}$", time)):
+    if not (isinstance(time, str) and re.match(r"^\d{2}:\d{2}$", time)):
         raise ValueError("Invalid time (HH:MM)")
 
-def airline_validator(name):
-    if not (type(name) == str and 2 <= len(name) <= 50):
-        raise ValueError("Invalid airline")
+def airline_validator(airline):
+    if not (isinstance(airline, str) and 2 <= len(airline) <= 50):
+        raise ValueError("Invalid airline name")

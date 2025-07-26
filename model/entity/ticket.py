@@ -1,8 +1,8 @@
 from model.tools.validation import *
 
 class Ticket:
-    def __init__(self, id, source, destination, seat_no, date, time, airline):
-        self.id = id
+    def __init__(self, ticket_id, source, destination, seat_no, date, time, airline):
+        self.ticket_id = ticket_id
         self.source = source
         self.destination = destination
         self.seat_no = seat_no
@@ -11,77 +11,78 @@ class Ticket:
         self.airline = airline
 
     def __repr__(self):
-        return f"Ticket {self.id} - {self.source} to {self.destination} ({self.date} {self.time})"
+        return f"Ticket({self.ticket_id}, {self.source}, {self.destination}, {self.seat_no}, {self.date}, {self.time}, {self.airline})"
 
     def to_tuple(self):
-        return self.id, self.source, self.destination, self.seat_no, self.date, self.time, self.airline
+        return (self.ticket_id, self.source, self.destination, self.seat_no, self.date, self.time, self.airline)
 
-    # ---- id ----
-    def get_id(self):
-        return self._id
+    # ---- ticket_id ----
+    @property
+    def ticket_id(self):
+        return self._ticket_id
 
-    def set_id(self, value):
+    @ticket_id.setter
+    def ticket_id(self, value):
         id_validator(value)
-        self._id = value
-
-    id = property(get_id, set_id)
+        self._ticket_id = value
 
     # ---- source ----
-    def get_source(self):
+    @property
+    def source(self):
         return self._source
 
-    def set_source(self, value):
+    @source.setter
+    def source(self, value):
         city_validator(value)
         self._source = value
 
-    source = property(get_source, set_source)
-
     # ---- destination ----
-    def get_destination(self):
+    @property
+    def destination(self):
         return self._destination
 
-    def set_destination(self, value):
+    @destination.setter
+    def destination(self, value):
         city_validator(value)
         self._destination = value
 
-    destination = property(get_destination, set_destination)
-
     # ---- seat_no ----
-    def get_seat_no(self):
+    @property
+    def seat_no(self):
         return self._seat_no
 
-    def set_seat_no(self, value):
+    @seat_no.setter
+    def seat_no(self, value):
         seat_no_validator(value)
         self._seat_no = value
 
-    seat_no = property(get_seat_no, set_seat_no)
-
     # ---- date ----
-    def get_date(self):
+    @property
+    def date(self):
         return self._date
 
-    def set_date(self, value):
+    @date.setter
+    def date(self, value):
         date_validator(value)
         self._date = value
 
-    date = property(get_date, set_date)
-
     # ---- time ----
-    def get_time(self):
+    @property
+    def time(self):
         return self._time
 
-    def set_time(self, value):
+    @time.setter
+    def time(self, value):
         time_validator(value)
         self._time = value
 
-    time = property(get_time, set_time)
-
     # ---- airline ----
-    def get_airline(self):
+    @property
+    def airline(self):
         return self._airline
 
-    def set_airline(self, value):
+    @airline.setter
+    def airline(self, value):
         airline_validator(value)
         self._airline = value
 
-    airline = property(get_airline, set_airline)
