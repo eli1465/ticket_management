@@ -1,59 +1,95 @@
 import re
+#  User
+def user_id_validator(user_id):
+    if type(user_id) != int:
+        raise ValueError("User ID must be an integer")
+    if user_id <= 0:
+        raise ValueError("User ID must be a positive number")
 
 def name_validator(name):
-    if not (type(name) == str and re.match(r"^[a-zA-Z\s]{3,30}$", name)):
-        raise ValueError("Invalid name")
+    if type(name) != str:
+        raise ValueError("Name must be a string")
+    if not re.match(r"^[a-zA-Z\s]{3,30}$", name):
+        raise ValueError("Name must be 3-30 characters, letters and spaces only")
 
 def family_validator(family):
-    if not (isinstance(family, str) and re.match(r"^[a-zA-Z\s]{3,30}$", family)):
-        raise ValueError("Invalid family")
-
-def id_validator(id):
-    if not (isinstance(id, int) and id > 0):
-        raise ValueError("Invalid ID (must be positive integer)")
+    if type(family) != str:
+        raise ValueError("Family must be a string")
+    if not re.match(r"^[a-zA-Z\s]{3,30}$", family):
+        raise ValueError("Family must be 3-30 characters, letters and spaces only")
 
 def username_validator(username):
-    if not (isinstance(username, str) and 3 <= len(username) <= 30):
-        raise ValueError("Invalid username")
+    if type(username) != str:
+        raise ValueError("Username must be a string")
+    if not re.match(r"^[a-zA-Z]\s{3,30}$", username):
+        raise ValueError("Username must be 3-30 characters with no spaces")
 
 def password_validator(password):
-    if not (type(password) == str and len(password) >= 6):
-        raise ValueError("Invalid password")
+    if type(password) != str:
+        raise ValueError("Password must be a string")
+    if len(password) < 6:
+        raise ValueError("Password must be at least 6 characters")
 
 def bool_validator(value):
-    if not (isinstance(value, bool) or str(value).lower() in ['true', 'false']):
-        raise ValueError("Invalid boolean value (true/false only)")
+    if type(value) != bool:
+        raise ValueError("Value must be True or False")
+
+def birth_date_validator(birth_date):
+    if type(birth_date) != str:
+        raise ValueError("Birth date must be a string")
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", birth_date):
+        raise ValueError("Birth date must be in YYYY-MM-DD format")
 
 def role_validator(role):
     if str(role).lower() not in ['customer', 'admin']:
         raise ValueError("Invalid role. Must be 'customer' or 'admin'")
+#ticket
+def ticket_id_validator(ticket_id):
+    if type(ticket_id) != int:
+        raise ValueError("Ticket ID must be an integer")
+    if ticket_id <= 0:
+        raise ValueError("Ticket ID must be a positive number")
 
-# ticket
+def ticket_code_validator(ticket_code):
+    if type(ticket_code) != str:
+        raise ValueError("Ticket code must be a string")
+    if not re.match(r"^[a-zA-Z0-9\-]{3,20}$", ticket_code):
+        raise ValueError("Ticket code must be 3-20 characters (letters, numbers, hyphen)")
+
 def city_validator(city):
-    if not (isinstance(city, str) and re.match(r"^[a-zA-Z\s]{2,50}$", city)):
-        raise ValueError("Invalid city")
-
-def code_validator(code):
-    if not (type(code) == str and 3 <= len(code) <= 20):
-        raise ValueError("Invalid ticket code")
-
-def datetime_validator(dt):
-    import re
-    if not (type(dt) == str and re.match(r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$', dt)):
-        raise ValueError("Invalid datetime format (YYYY-MM-DD HH:MM)")
-
-def seat_no_validator(seat_no):
-    if not (type(seat_no) == int and 1 <= seat_no <= 300):
-        raise ValueError("Invalid seat number")
-
-def date_validator(date):
-    if not (type(date) == str and re.match(r"\d{4}-\d{2}-\d{2}$", date)):
-        raise ValueError("Invalid date (YYYY-MM-DD)")
-
-def time_validator(time):
-    if not (isinstance(time, str) and re.match(r"^\d{2}:\d{2}$", time)):
-        raise ValueError("Invalid time (HH:MM)")
+    if type(city) != str:
+        raise ValueError("City must be a string")
+    if not re.match(r"^[a-zA-Z\s]{2,50}$", city):
+        raise ValueError("City must be 2-50 characters, letters and spaces only")
 
 def airline_validator(airline):
-    if not (isinstance(airline, str) and 2 <= len(airline) <= 50):
-        raise ValueError("Invalid airline name")
+    if type(airline) != str:
+        raise ValueError("Airline must be a string")
+    if not re.match(r"^[a-zA-Z0-9\s]{2,50}$", airline):
+        raise ValueError("Airline must be 2-50 characters, letters, numbers and spaces")
+
+def datetime_validator(datetime_value):
+    if type(datetime_value) != str:
+        raise ValueError("Datetime must be a string")
+    if not re.match(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", datetime_value):
+        raise ValueError("Datetime must be in format YYYY-MM-DD HH:MM")
+
+def price_validator(price):
+    if type(price) != float and type(price) != int:
+        raise ValueError("Price must be a number")
+    if price < 0:
+        raise ValueError("Price cannot be negative")
+
+def seat_no_validator(seat_no):
+    if type(seat_no) != int:
+        raise ValueError("Seat number must be an integer")
+    if seat_no < 1 or seat_no > 300:
+        raise ValueError("Seat number must be between 1 and 300")
+
+def sold_validator(value):
+    if type(value) != bool:
+        raise ValueError("Sold must be a boolean")
+
+
+
+

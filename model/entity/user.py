@@ -1,35 +1,40 @@
 from model.tools.validation import *
 
 class User:
-    def __init__(self, code, name, family, username, password, role, locked=False):
-        self.code = code
+    def __init__(self, user_id, name, family, birth_date, username, password, locked, role):
+        self.user_id = user_id
         self.name = name
         self.family = family
+        self.birth_date = birth_date
         self.username = username
         self.password = password
-        self.role = role
         self.locked = locked
+        self.role = role
 
     def full_name(self):
         return f"{self.name} {self.family}"
 
+    def __str__(self):
+        return f"{self.user_id} - {self.username} - {self.role}"
+
     def __repr__(self):
-        return f"User({self.code}, {self.name}, {self.family}, {self.username}, {self.password}, {self.role}, {self.locked})"
+        return f"User({self.user_id}, {self.name}, {self.family}, {self.username}, {self.role})"
 
     def to_tuple(self):
-        return (self.code, self.name, self.family, self.username, self.password, self.role, self.locked)
+        return (self.user_id, self.name, self.family, self.birth_date,
+                self.username, self.password, self.locked, self.role)
 
-    # -------- code --------
+    # ---------- user_id ----------
     @property
-    def code(self):
-        return self._code
+    def user_id(self):
+        return self._user_id
 
-    @code.setter
-    def code(self, value):
-        code_validator(value)
-        self._code = value
+    @user_id.setter
+    def user_id(self, value):
+        user_id_validator(value)
+        self._user_id = value
 
-    # -------- name --------
+    # ---------- name ----------
     @property
     def name(self):
         return self._name
@@ -39,7 +44,7 @@ class User:
         name_validator(value)
         self._name = value
 
-    # ----- family -----
+    # ---------- family ----------
     @property
     def family(self):
         return self._family
@@ -49,7 +54,17 @@ class User:
         family_validator(value)
         self._family = value
 
-    # ----- username -----
+    # ---------- birth_date ----------
+    @property
+    def birth_date(self):
+        return self._birth_date
+
+    @birth_date.setter
+    def birth_date(self, value):
+        birth_date_validator(value)
+        self._birth_date = value
+
+    # ---------- username ----------
     @property
     def username(self):
         return self._username
@@ -59,7 +74,7 @@ class User:
         username_validator(value)
         self._username = value
 
-    # ----- password -----
+    # ---------- password ----------
     @property
     def password(self):
         return self._password
@@ -69,7 +84,17 @@ class User:
         password_validator(value)
         self._password = value
 
-    # ---- role ----
+    # ---------- is_locked ----------
+    @property
+    def locked(self):
+        return self._locked
+
+    @locked.setter
+    def locked(self, value):
+        bool_validator(value)
+        self._locked = value
+
+    # ---------- role ----------
     @property
     def role(self):
         return self._role
@@ -77,15 +102,4 @@ class User:
     @role.setter
     def role(self, value):
         role_validator(value)
-        self._role = str(value).lower()  # ذخیره به صورت lowercase برای یکپارچگی
-
-    # ----- locked -----
-    @property
-    def locked(self):
-        return self._locked
-
-    @locked.setter
-    def locked(self, value):
-        if not isinstance(value, bool):
-            raise ValueError("locked must be a boolean")
-        self._locked = value
+        self._role = value.lower()

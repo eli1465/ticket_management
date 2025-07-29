@@ -1,9 +1,9 @@
 import pickle
 import os
 
-# فایل‌ها
-user_file = "user.pkl"
-ticket_file = "ticket.pkl"
+
+user_file = "user.dat"
+ticket_file = "ticket.dat"
 
 def file_exists(file_name):
     return os.path.exists(file_name)

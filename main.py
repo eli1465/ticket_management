@@ -3,9 +3,9 @@ from view.ticket_view import TicketView
 
 if __name__ == "__main__":
     print("Select interface:")
-    print("1. User Managment(GUI)")
-    print("2. Ticket Managment(GUI)")
-    choice = input("Enter your choice (1/2): ")
+    print("1. User ManagerGUI)")
+    print("2. Ticket ManagerGUI)")
+    choice = input("Enter your choice please(1/2): ")
 
     if choice == "1":
         UserView()
